@@ -1,0 +1,6 @@
+<a href="" data-toggle="modal" data-target="#exampleModalCenter-<%= @list.id %>-<%= @movie.id %>">
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @movie.poster_url %>)">
+    <%= @movie.title %>
+  </div>
+</a>
+<%= render 'lists/modalbox' %>

@@ -1,23 +1,43 @@
 <%= render "/lists/navbar" %>
 <%= render "/lists/banner" %>
 <div class="container my-3">
-  <div class="d-flex">
-    <h1>Movies List</h1>
-  </div>
-  <%= link_to "Create List", new_list_path , class: "btn btn-primary" %>
-  <div class="d-flex">
-    <% @lists.each do |list| %>
-      <div class="card mr-2 ml-0 mt-2" style="width: 18rem;">
+  <% @lists.each do |list| %>
+    <div class="my-2">
+      <div class="d-flex justify-content-between">
         <%= link_to list_path(list) do %>
-          <% poster_url = list.movies.any? ? list.movies.sample.poster_url : "https://source.unsplash.com/VUWWNVbo61s/572x858" %>
-          <img src="<%= poster_url %>" class="card-img-top" alt="">
+          <h2><%= list.name %></h2>
         <% end %>
-        <div class="card-body d-flex justify-content-between">
-          <h5 class="card-title"><%= list.name %></h5>
-          <%= link_to list_path(list), method: "DELETE" do %>
+        <div class="d-flex">
+          <%= link_to list_path(list) do %>
+            <%= icon('fas', 'eye', class: "text-danger mr-2") %>
+          <% end %>
+          <%= link_to list_path(list), method: "DELETE", data: { confirm: "Delete?" } do %>
             <%= icon('fas', 'trash', class: "text-danger") %>
           <% end %>
         </div>
+      </div>
+      <div id="carouselMovieListControls-<%= list.id %>" class="carousel slide p-2 mb-4 rounded" data-interval="false" data-ride="carousel" style="background-color: #DDD;">
+        <div class="carousel-inner">
+          <% list.movies.each_slice(4) do |s_movie| %>
+            <div class="carousel-item <%= list.movies.first == s_movie[0] ? "active" : "" %>">
+              <div class="cards">
+                <% s_movie.each do |movie| %>
+                  <% @movie = movie %>
+                  <% @list = list %>
+                  <%= render '/lists/moviecard' %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <a class="carousel-control-prev small-carousel-btn" href="#carouselMovieListControls-<%= list.id %>" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next small-carousel-btn" href="#carouselMovieListControls-<%= list.id %>" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
     <% end %>
   </div>

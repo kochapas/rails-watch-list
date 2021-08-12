@@ -3,7 +3,7 @@
   <h1>Add Bookmark</h1>
   <%= simple_form_for [ @list, @bookmark ] do |f| %>
     <%= f.input :comment , input_html: { placeholder: "I'm Lovin' It!"}%>
-    <%= f.association :movie %>
+    <%= f.association :movie, include_blank: false, collection: @non_sel_movies %>
     <%= f.submit class: "btn btn-primary"%>
   <% end %>
 </div>
