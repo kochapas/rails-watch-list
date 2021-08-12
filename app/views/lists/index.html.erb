@@ -1,16 +1,24 @@
 <%= render "/lists/navbar" %>
-<div class="container">
-  <h1>Movies List</h1>
+<%= render "/lists/banner" %>
+<div class="container my-3">
+  <div class="d-flex">
+    <h1>Movies List</h1>
+  </div>
+  <%= link_to "Create List", new_list_path , class: "btn btn-primary" %>
   <div class="d-flex">
     <% @lists.each do |list| %>
-      <%= link_to list_path(list) do %>
-        <div class="card m-2" style="width: 18rem;">
-          <img src="<%= list.movies.sample.poster_url %>"  class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title"><%= list.name %></h5>
-          </div>
+      <div class="card mr-2 ml-0 mt-2" style="width: 18rem;">
+        <%= link_to list_path(list) do %>
+          <% poster_url = list.movies.any? ? list.movies.sample.poster_url : "https://source.unsplash.com/VUWWNVbo61s/572x858" %>
+          <img src="<%= poster_url %>" class="card-img-top" alt="">
+        <% end %>
+        <div class="card-body d-flex justify-content-between">
+          <h5 class="card-title"><%= list.name %></h5>
+          <%= link_to list_path(list), method: "DELETE" do %>
+            <%= icon('fas', 'trash', class: "text-danger") %>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     <% end %>
   </div>
 </div>
