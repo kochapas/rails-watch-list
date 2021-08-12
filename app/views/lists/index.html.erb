@@ -1,0 +1,16 @@
+<%= render "/lists/navbar" %>
+<div class="container">
+  <h1>Movies List</h1>
+  <div class="d-flex">
+    <% @lists.each do |list| %>
+      <%= link_to list_path(list) do %>
+        <div class="card m-2" style="width: 18rem;">
+          <img src="<%= list.movies.sample.poster_url %>"  class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= list.name %></h5>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
