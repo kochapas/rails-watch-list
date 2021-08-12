@@ -5,18 +5,18 @@
     <div class="my-2">
       <div class="d-flex justify-content-between">
         <%= link_to list_path(list) do %>
-          <h2><%= list.name %></h2>
+          <h2 class="font-rubik"><%= list.name %></h2>
         <% end %>
         <div class="d-flex">
           <%= link_to list_path(list) do %>
-            <%= icon('fas', 'eye', class: "text-danger mr-2") %>
+            <%= icon('fas', 'eye', class: "mr-2") %>
           <% end %>
           <%= link_to list_path(list), method: "DELETE", data: { confirm: "Delete?" } do %>
-            <%= icon('fas', 'trash', class: "text-danger") %>
+            <%= icon('fas', 'trash') %>
           <% end %>
         </div>
       </div>
-      <div id="carouselMovieListControls-<%= list.id %>" class="carousel slide p-2 mb-4 rounded" data-interval="false" data-ride="carousel" style="background-color: #DDD;">
+      <div id="carouselMovieListControls-<%= list.id %>" class="carousel slide p-2 mb-4 rounded carousel-movie-base" data-interval="false" data-ride="carousel">
         <div class="carousel-inner">
           <% list.movies.each_slice(4) do |s_movie| %>
             <div class="carousel-item <%= list.movies.first == s_movie[0] ? "active" : "" %>">
@@ -25,6 +25,13 @@
                   <% @movie = movie %>
                   <% @list = list %>
                   <%= render '/lists/moviecard' %>
+                <% end %>
+                <!-- Add empty card to prevent carousel from collapsing when resize the screen (to keep it 4x1 or 2x2)-->
+                <% if s_movie.count < 4 %>
+                  <% (4 - s_movie.count).times do %>
+                    <div class="card-category card-category-bg invisible">
+                    </div>
+                  <% end %>
                 <% end %>
               </div>
             </div>
