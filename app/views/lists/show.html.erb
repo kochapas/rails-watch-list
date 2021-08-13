@@ -1,7 +1,12 @@
 <%= render "/lists/navbar" %>
+<% attached_img_url = @list.photo.attached? ? (cl_image_path @list.photo.key, width: 2000, crop: :fill, gravity: :face) : "" %>
+<div class="banner" style="background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= attached_img_url %>);">
+  <div class="container">
+    <h1 class="font-acme"><%= @list.name %></h1>
+    <%= link_to "Add Bookmark", new_list_bookmark_path(@list) , class: "btn btn-warning mb-2" %>
+  </div>
+</div>
 <div class="container my-3">
-  <h1><%= @list.name %></h1>
-  <%= link_to "Add Bookmark", new_list_bookmark_path(@list) , class: "btn btn-warning mb-3" %>
   <% @list.bookmarks.each do |bookmark| %>
     <% @movie = bookmark.movie %>
     <div class="card-product-base">

@@ -1,10 +1,17 @@
 .banner {
   background-size: cover;
   background-color: #985501;
-  background-position: 50% 50%;
   padding: 150px 0;
   height: 500px;
+  background-position: 50% 50%;
+  background-attachment: fixed;
+  // transition:background-position 10s ease;
+  // -webkit-transition:background-position 10s ease;
+  // &:hover {
+  //   background-position: 50% 100%;
+  // }
 }
+
 
 .banner h1 {
   margin: 0;

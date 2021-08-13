@@ -16,7 +16,8 @@
           <% end %>
         </div>
       </div>
-      <div id="carouselMovieListControls-<%= list.id %>" class="carousel slide p-2 mb-4 rounded carousel-movie-base" data-interval="false" data-ride="carousel">
+      <% attached_img_url = list.photo.attached? ? (cl_image_path list.photo.key, width: 1000, crop: :fill, gravity: :face) : "" %>
+      <div id="carouselMovieListControls-<%= list.id %>" class="carousel slide p-2 mb-4 rounded carousel-movie-base" data-interval="false" data-ride="carousel" style="background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= attached_img_url %>')">
         <div class="carousel-inner">
           <% list.movies.each_slice(4) do |s_movie| %>
             <div class="carousel-item <%= list.movies.first == s_movie[0] ? "active" : "" %>">
