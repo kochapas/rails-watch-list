@@ -1,9 +1,9 @@
 <%= render "/lists/navbar" %>
-<% attached_img_url = @list.photo.attached? ? (cl_image_path @list.photo.key, width: 2000, crop: :fill, gravity: :face) : "" %>
-<div class="banner" style="background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= attached_img_url %>);">
+<% attached_img_url = @list.photo.attached? ? (cl_image_path @list.photo.key, width: 2000, crop: :fill, gravity: :face) : "https://source.unsplash.com/hR47GPQaZb0/1600x900" %>
+<div class="banner banner-hover" style="background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= attached_img_url %>);">
   <div class="container">
     <h1 class="font-acme"><%= @list.name %></h1>
-    <%= link_to "Add Bookmark", new_list_bookmark_path(@list) , class: "btn btn-warning mb-2" %>
+    <%= link_to "Add Bookmark", new_list_bookmark_path(@list) , class: "btn btn-warning mb-2 font-rubik" %>
   </div>
 </div>
 <div class="container my-3">
