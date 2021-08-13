@@ -9,10 +9,10 @@
         <% end %>
         <div class="d-flex">
           <%= link_to list_path(list) do %>
-            <%= icon('fas', 'eye', class: "mr-2") %>
+            <%= icon('fas', 'eye', class: "mr-4 h3") %>
           <% end %>
           <%= link_to list_path(list), method: "DELETE", data: { confirm: "Delete?" } do %>
-            <%= icon('fas', 'trash') %>
+            <%= icon('fas', 'trash', class: 'h3') %>
           <% end %>
         </div>
       </div>
